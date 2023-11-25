@@ -1,7 +1,16 @@
+import { api } from "@/data/api";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+async function getFeaturedProducts() {
+  const response = await api("/products/featured");
+  return response;
+}
+
+export default async function Home() {
+  const products = await getFeaturedProducts();
+  console.log(products);
+
   return (
     <div className="grid max-h-[860px] grid-cols-9 grid-rows-6 gap-6">
       <Link
